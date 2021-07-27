@@ -6,6 +6,7 @@ function draw() {
   compare();
   multi();
   quadraticCurve();
+  quadraticCurve1();
   bezierCurve();
   dot();
   path2d();
@@ -20,6 +21,15 @@ function draw() {
   createLinearGradient();
   createRadialGradient();
   pattern();
+  fillText();
+  image();
+  Scaling();
+  Scaling1();
+  Scaling2();
+  Scaling3();
+  frame();
+  saveAndStore();
+  translate();
 }
 
 function simple() {
@@ -136,6 +146,25 @@ function quadraticCurve() {
   ctx.quadraticCurveTo(60, 120, 65, 100)
   ctx.quadraticCurveTo(125, 100, 125, 62.5)
   ctx.quadraticCurveTo(125, 25, 75, 25)
+  ctx.stroke()
+  
+}
+
+function quadraticCurve1() {
+  const canvas = document.getElementById('quadraticCurve1')
+  if (!canvas.getContext) {
+    return
+  }
+  const ctx = canvas.getContext('2d')
+
+  ctx.beginPath()
+  ctx.moveTo(75, 25)
+  ctx.bezierCurveTo(25, 25,25, 25, 25, 62.5)
+  ctx.bezierCurveTo(25, 100, 25, 100,50, 100)
+  ctx.bezierCurveTo(50, 120,50, 120, 30, 125)
+  ctx.bezierCurveTo(60, 120,60, 120, 65, 100)
+  ctx.bezierCurveTo(125, 100, 125, 100,125, 62.5)
+  ctx.bezierCurveTo(125, 25, 125, 25,75, 25)
   ctx.stroke()
   
 }
@@ -392,5 +421,139 @@ function pattern() {
     const ptrn = ctx.createPattern(img, 'repeat');
     ctx.fillStyle = ptrn;
     ctx.fillRect(0,0,200,200)
+  }
+}
+
+function fillText() {
+  const ctx = document.getElementById('fillText').getContext('2d');
+
+  ctx.font = "48px serif";
+  ctx.fillText('hello world', 10, 50)
+  
+  ctx.strokeText('hello world', 10, 100)
+  
+  const text = ctx.measureText("hello world")
+}
+
+
+function image() {
+
+  const ctx = document.getElementById('image').getContext('2d');
+  const img = new Image()
+  img.src = "https://mdn.mozillademos.org/files/5395/backdrop.png"
+  // img.src = "data:image/gif;base64,R0lGODlhCwALAIAAAAAA3pn/ZiH5BAEAAAEALAAAAAALAAsAAAIUhA+hkcuO4lmNVindo7qyrIXiGBYAOw=="
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0)
+    
+    ctx.beginPath()
+    ctx.moveTo(30, 96)
+    ctx.lineTo(70, 66)
+    ctx.lineTo(103, 76)
+    ctx.lineTo(170, 15)
+    ctx.stroke()
+  }
+}
+
+
+function Scaling() {
+  const ctx = document.getElementById('Scaling').getContext('2d');
+
+  const img = new Image();
+
+  img.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg"
+
+  img.onload = function () {
+    ctx.drawImage(img,0,0)
+  }
+}
+
+function Scaling1() {
+  const ctx = document.getElementById('Scaling1').getContext('2d');
+
+  const img = new Image();
+
+  img.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg"
+
+  img.onload = function () {
+    ctx.drawImage(img,21, 20)
+  }
+}
+
+function Scaling2() {
+  const ctx = document.getElementById('Scaling2').getContext('2d');
+
+  const img = new Image();
+
+  img.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg"
+
+  img.onload = function () {
+    
+    ctx.drawImage(img, 21, 20, 87, 104);
+  }
+}
+function Scaling3() {
+  const ctx = document.getElementById('Scaling3').getContext('2d');
+
+  const img = new Image();
+
+  img.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg"
+
+  img.onload = function () {
+    ctx.drawImage(img, 33, 71, 104, 124, 21, 20, 87, 104);
+    // ctx.drawImage(img, 21, 20, 87, 104);
+  }
+}
+
+function frame() {
+  const ctx = document.getElementById('frame').getContext('2d')
+
+  const img = new Image();
+  img.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg"
+  const frame = new Image();
+  frame.src = "https://mdn.mozillademos.org/files/242/Canvas_picture_frame.png"
+
+  img.onload = () => {
+    ctx.drawImage(img,33,71,104,124,21,20,87,104)
+  }
+
+  frame.onload = () => {
+    ctx.drawImage(frame,0,0)
+  }
+
+}
+
+function saveAndStore() {
+  const ctx = document.getElementById('saveAndStore').getContext('2d')
+
+  ctx.fillRect(0,0,150,150);   // 使用默认设置绘制一个矩形
+  ctx.save();
+
+  ctx.fillStyle = "#09F";
+  ctx.fillRect(15, 15, 120, 120)
+  ctx.save();
+
+  ctx.fillStyle = "#fff";
+  ctx.globalAlpha = 0.5;
+  ctx.fillRect(30, 30, 90, 90);
+
+  ctx.restore();
+  ctx.fillRect(45, 45, 60, 60);
+
+  ctx.restore();
+  ctx.fillRect(60, 60, 30, 30);
+}
+
+function translate() {
+  const ctx = document.getElementById('translate').getContext('2d');
+
+  for (let i = 0; i < 3; i++){
+    for (let j = 0; j < 3; j++){
+      ctx.save();
+      ctx.fillStyle = 'rgb(' + (51 * i) + ', ' + (255 - 51 * i) + ', 255)';
+
+      ctx.translate(i * 40, j * 40);
+      ctx.fillRect(0, 0, 20, 20);
+      ctx.restore();
+    }
   }
 }

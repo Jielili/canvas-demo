@@ -25,8 +25,6 @@ function load() {
   })
 
   document.querySelector('.controller').addEventListener('click', () => {
-    console.log('click')
-    console.log(left.style.width)
     if (left.style.width === '0px') {
       left.style.width = '50%';
       right.style.width = '50%';
@@ -42,15 +40,14 @@ function load() {
 }
 
 function date() {
-  // console.log(moment().format())
   moment.locale('zh-cn');  
   const a = moment().add(0, 'd')
-  console.log(a.format('E'))
 
   const parent = document.querySelector('.right .header')
 
+  const draw = document.querySelector('.draw')
 
-  for (let i = 0; i < 5; i++){
+  for (let i = 0; i < 10; i++){
     const container = document.createElement('div')
     container.classList.add('container')
     const up = document.createElement('div')
@@ -61,10 +58,19 @@ function date() {
     container.appendChild(down);
     const start = moment().add(i * 7 - 3, 'd');
     const end = moment().add(i * 7 - 3 + 6, 'd');
+
+
+    const section = document.createElement('div');
+    section.classList.add('section')
+    draw.appendChild(section);
+
+
     up.textContent = start.format('MM')+ '.'+start.format('DD') +"~"+end.format('MM')+ '.'+end.format('DD')
     for (let j = 0; j < 7; j++){
       const dayContainer = document.createElement('div')
       dayContainer.classList.add('day')
+
+
       const day = moment().add(i*7+j -3,'d')
       const d = document.createElement('div')
       d.classList.add('num')
@@ -74,6 +80,12 @@ function date() {
       dayContainer.appendChild(d)
       dayContainer.appendChild(w)
       down.appendChild(dayContainer)
+
+
+      const bg = document.createElement('div');
+      bg.classList.add('bg');
+
+      section.appendChild(bg)
     }
     parent.appendChild(container)
   }

@@ -50,6 +50,7 @@ html,body{
   background-color: #E9EAEE;
   cursor: col-resize;
   position: absolute;
+  z-index: 3;
 }
 
 .content{

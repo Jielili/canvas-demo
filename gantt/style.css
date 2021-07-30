@@ -26,8 +26,11 @@ html,body{
   width: 100%;
   position: absolute;
   top: 64px;
-  z-index: 2;
+  /* z-index: 2; */
   mix-blend-mode: multiply;
+  height: calc(100% - 64px);
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 
@@ -35,6 +38,15 @@ html,body{
   width: 50%;
   flex: 1 1 auto;
   box-shadow: 0px 0px 10px 0 rgba(235, 234, 236);
+}
+
+.left .info::-webkit-scrollbar{
+  display:none;
+}
+
+.left .info {
+  height: calc(100% - 64px);
+  overflow-y: scroll;
 }
 
 .right {
@@ -50,13 +62,15 @@ html,body{
   background-color: #E9EAEE;
   cursor: col-resize;
   position: absolute;
-  z-index: 3;
+  /* z-index: 3; */
 }
 
 .content{
   margin-left: 4px;
   height: 100%;
   mix-blend-mode: multiply;
+  position: relative;
+  width: max-content;
 }
 
 
@@ -115,9 +129,20 @@ html,body{
   line-height: 13px;
 }
 
-.draw {
+.draw-bg {
+  position: absolute;
   height: calc(100% - 64px);
   display: flex;
+  top: 64px;
+  z-index: 1;
+}
+
+.draw{
+  position: relative;
+  height: calc(100% - 64px);
+  overflow-y: scroll;
+  z-index: 2;
+  mix-blend-mode: multiply;
 }
 
 .section {
@@ -128,7 +153,7 @@ html,body{
   border-left: solid 1px #DFE6ED;
   display: flex;
   justify-content: space-evenly;
-  z-index: 20;
+  /* z-index: 20; */
 
 }
 
@@ -145,16 +170,29 @@ html,body{
   flex: 1;
 }
 
-.main .bgx .row,
-.info .row {
+.main .bgx [class|='row'],
+.info [class|='row'],
+.draw [class|='row']{
   height: 32px;
 }
 
 
-.main .bgx .person:nth-child(odd){
+.main  .person:nth-child(odd){
   background-color: #F8F8F8;
 }
 
-.main .bgx .row:hover {
+.main [class|='row']:hover {
   background-color: #E9F2FF;
+}
+
+.row {
+  position: relative;
+}
+
+.bar {
+  background-color: #FFD790;
+  border-radius: 10px;
+  height: 22px;
+  margin-top: 5px;
+  display: inline-block;
 }

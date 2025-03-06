@@ -47,6 +47,7 @@ function load() {
   const left = document.querySelector('.left');
   const main = document.querySelector('.main');
   document.addEventListener('mousedown', (e) => {
+    document.body.style.userSelect = "none";
     if(e.target !== ele){
       return;
     }
@@ -64,6 +65,7 @@ function load() {
     document.addEventListener('mousemove', handleMove);
     document.addEventListener('mouseup', () => {
       document.removeEventListener('mousemove', handleMove);
+      document.body.style.userSelect = "";
     })
   })
 
